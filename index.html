@@ -1,0 +1,76 @@
+<script>
+ // Hours loop
+ function createHourOption(){
+ 	var hourOptions = "<option>Select</option>"; //empty first field in Hour option 
+ 	for(var i = 0; i <= 23; i++){ //loop 
+  var x = i <= 9 ? x = "0" + i : x = i;//condition to get 0 before 9
+ 	hourOptions += "<option>" + x + "</option>"; 
+ }
+ 	document.getElementById("setHour").innerHTML = hourOptions;
+ }
+ 
+ //Minutes Loop
+ function createMinOption(){
+ 	var MinOptions = "<option>Select</option>"; //empty first field in Minutes option
+ 	for(var i = 0; i <= 60; i++){ // Loop
+	var x = i <= 9 ? x = "0" + i : x = i;//condition to get 0 before 9
+ 	MinOptions += "<option>" + x + "</option>"
+ }
+ 	document.getElementById("setMin").innerHTML = MinOptions;
+ }
+
+ //Set Alarm Value function
+ function alarm(){
+ 	var hr, mini, setTime;
+  hr = document.querySelector("#setHour").value; //user Hours value
+ 	mini = document.querySelector("#setMin").value;// user minutes value
+  setTime = document.getElementById("text").innerHTML = hr + ":" + mini;  
+ }
+ 
+</script>
+<body onload="displayDate()">
+<label>Current Date:</label>
+<h3 id="date"> </h3>
+<form>
+<select id="setHour">
+  <script>createHourOption()</script> 
+</select>
+<select id="setMin">
+  <script>createMinOption()</script> 
+</select>
+<button type="button" value="setAlarm" onclick="alarm()">Set Alarm</button>
+</form>
+<p id="text"></p>
+</body>
+<script>
+
+// Date Function
+function displayDate(){
+	
+	var d = new Date(); //Display Full Curent date and Time
+  var h = d.getHours(); // Display current hours
+  var m = d.getMinutes(); // Display current minutes
+  var s = d.getSeconds(); // Display Current seconds
+  h = checkTime(h);
+  m = checkTime(m);
+  s = checkTime(s);
+  document.getElementById("date").innerHTML = h + ":" + m + ":" + s;
+  var t = setTimeout(displayDate, 1000);
+	var hr, mini, setTime;
+  hr = document.querySelector("#setHour").value; //user Hours value
+ 	mini = document.querySelector("#setMin").value;// user minutes value
+  
+  setTime = hr + ":" + mini;
+  var time = h + ":" + m;
+  
+	console.log(typeof setTime);
+	if(time == setTime){
+    alert("ring");  
+  }
+}
+function checkTime(i) {
+  i <= 9 ? i = "0" + i : i = i ;  // add zero in front of numbers < 10
+  return i;
+}
+
+</script>
